@@ -1,0 +1,15 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+#result img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
+#error {
+    color: red;
+    margin-top: 20px;
+}
