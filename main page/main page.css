@@ -2,7 +2,7 @@ body {
 	background-color: #A0B2DE
 }
 .ai-generator {
-    width: 1400px;
+    width: 75%;
     height: 100px;
     background-color: #c7ecf6;
     padding: 10px;
@@ -14,7 +14,7 @@ body {
 	margin-top:200px;
 }
 .decorate {
-	height: 600px;
+	height: 60vh;
 	width: 70%;
 	background-color: white;
 	margin: 50px;
