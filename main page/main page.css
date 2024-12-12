@@ -8,8 +8,8 @@ body {
     padding: 10px;
 }
 .design-tools {
-	height:800px;
-	width:350px;
+	height:80vh;
+	width: 19vw;
 	background-color: #c7ecf6;
 	margin-top:200px;
 }
@@ -18,8 +18,4 @@ body {
 	width: 70%;
 	background-color: white;
 	margin: 50px;
-}
-.img {
-	max-width: 100%;
-	height: auto;
 }
