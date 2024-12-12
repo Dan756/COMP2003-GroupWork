@@ -3,14 +3,28 @@
 <head>
 <link href="main page.css" rel="stylesheet"/>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-</head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 <div class="w3-display-container" style="height:100px;">
 	<div class = "ai-generator">
-		<img src="gpt-logo.png" alt="gpt-logo">
+		<img src="gpt-logo.png" alt="gpt-logo" style ="width: 13vw; height: 10vh;">
+		<br>
+		<form id="image-form">
+			<label for="prompt">Prompt:</label>
+			<input type="text" id="prompt" name="prompt" placeholder="Describe your image..." required>
+			<button type="submit">Generate</button>
+		</form>
+		<br>
+		<label for="dropdown">Image Size:</label>
+		<select id="ImageSize" name="dropdown" required>
+			<option value="" disabled selected>Select an option</option>
+			<option value="256x256">256x256</option>
+			<option value="512x512">512x512</option>
+			<option value="1024x1024">1024x1024</option>
+		</select>
 	</div>
 	<div class="w3-display-topright img" style="padding-right: 100px;">
-		<img src="wrap it logo 2.png" style="height: 200px; width: 200px; alt="logo" >
+		<img src="wrap it logo 2.png" style="aspect-ratio: 1/1; width: 10vw; alt="logo" >
 	</div>
 </div>
 <div style="margin: 10px;">
@@ -23,35 +37,34 @@
 		Upload  
 	</button>
 </div>
-</head>
 <body>
 <div class="w3-display-container design-tools w3-display-topright">
 	<button id="draw-button" class="w3-button w3-round w3-ripple" style="background-color: #A0B2DE; margin: 15px;">
-		<img src="pencil.png" alt="draw" style="width:6vw; aspect-ratio: 1/1;">
+		<img src="pencil.png" alt="draw" style="width:5vw; aspect-ratio: 1/1;">
 	</button>
 	<button id="add-image-button" class="w3-button w3-round w3-ripple img" style="background-color: #A0B2DE; margin: 15px;">
-		<img src="add-image.png" alt="add image" style="width:6vw; aspect-ratio: 1/1;">
+		<img src="add-image.png" alt="add image" style="width:5vw; aspect-ratio: 1/1;">
 	</button>
 	<br>
 	<button id="fill-button" class="w3-button w3-round w3-ripple img" style="background-color: #A0B2DE; margin: 15px;">
-		<img src="paint-bucket.png" alt="fill tool" style="width:6vw; aspect-ratio: 1/1;">
+		<img src="paint-bucket.png" alt="fill tool" style="width:5vw; aspect-ratio: 1/1;">
 	</button>
 	<button id="erase-button" class="w3-button w3-round w3-ripple img" style="background-color: #A0B2DE; margin: 15px;">
-		<img src="erase.png" alt="eraser" style="width:6vw; aspect-ratio: 1/1;">
+		<img src="erase.png" alt="eraser" style="width:5vw; aspect-ratio: 1/1;">
 	</button>
 	<br>
 	<button id="text-button" class="w3-button w3-round w3-ripple img" style="background-color: #A0B2DE; margin: 15px;">
-		<img src="text.png" alt="text" style="width:6vw; aspect-ratio: 1/1;">
+		<img src="text.png" alt="text" style="width:5vw; aspect-ratio: 1/1;">
 	</button>
 	<button id="paint-button" class="w3-button w3-round w3-ripple img" style="background-color: #A0B2DE; margin: 15px;">
-		<img src="paintbrush.png" alt="paint" style="width:6vw; aspect-ratio: 1/1;">
+		<img src="paintbrush.png" alt="paint" style="width:5vw; aspect-ratio: 1/1;">
 	</button>
 	<br>
 	<button id="sticker-button" class="w3-button w3-round w3-ripple img" style="background-color: #A0B2DE; margin: 15px;">
-		<img src="sticker.png" alt="sticker" style="width:6vw; aspect-ratio: 1/1;">
+		<img src="sticker.png" alt="sticker" style="width:5vw; aspect-ratio: 1/1;">
 	</button>
 	<button id="crop-button" class="w3-button w3-round w3-ripple img" style="background-color: #A0B2DE; margin: 15px;">
-		<img src="crop.png" alt="crop" style="width:6vw; aspect-ratio: 1/1;">
+		<img src="crop.png" alt="crop" style="width:5vw; aspect-ratio: 1/1;">
 	</button>
 </div>
 <div class="w3-display-container decorate">

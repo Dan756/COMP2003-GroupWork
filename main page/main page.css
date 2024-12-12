@@ -6,6 +6,9 @@ body {
     height: 100px;
     background-color: #c7ecf6;
     padding: 10px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
 }
 .design-tools {
 	height:80vh;
@@ -17,5 +20,5 @@ body {
 	height: 60vh;
 	width: 70%;
 	background-color: white;
-	margin: 50px;
+	margin: 2%;
 }
