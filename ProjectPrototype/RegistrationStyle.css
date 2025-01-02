@@ -1,0 +1,74 @@
+﻿/* Reset body margins and set background */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #A0B2DE; /* Light blue */
+    font-family: "Arial", sans-serif;
+}
+
+/* Registration container */
+.login-container {
+    max-width: 400px;
+    margin: 50px auto; /* Center horizontally */
+    padding: 0px;
+    background-color: #A0B2DE; 
+    border-radius: 8px; /* Rounded corners */
+    text-align: center;
+}
+
+/* Logo styling */
+.logo {
+    max-width: 80%;
+    /*margin-bottom: 10px; */
+}
+
+/* Registration input fields */
+.login-input {
+    margin-bottom: 15px;
+    padding: 12px; /* Added padding for better UX */
+    border: 1px solid #ccc; /* Soft border */
+    border-radius: 5px; /* Rounded input edges */
+}
+
+/* Custom button styling */
+.custom-button {
+    background-color: #6a5acd; /* Custom purple */
+    color: white;
+    padding: 10px 20px; /* Padding for button */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px; /* Rounded button edges */
+}
+
+    .custom-button:hover {
+        background-color: #483d8b; /* Darker purple */
+    }
+
+/* Register button styling */
+.login-button {
+    background-color: #f0f0f0;
+    color: #000;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px; /* Rounded button edges */
+    cursor: pointer;
+}
+
+    .login-button:hover {
+        background-color: #dcdcdc;
+    }
+
+/* Error message styling */
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+/* Register link */
+.w3-text-blue {
+    color: #1e90ff; /* Blue color for the registration link */
+}
+
+    .w3-text-blue:hover {
+        color: #4682b4; /* Darker blue when hovered */
+    }
