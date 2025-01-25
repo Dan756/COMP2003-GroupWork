@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<HTML>
+<head>
+<link href="main page.css" rel="stylesheet"/>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<div class="w3-display-container" style="height:100px;">
+	<div class = "ai-generator">
+		<img src="images/gpt-logo.png" alt="gpt-logo" style ="width: 13vw; height: 10vh;">
+		<br>
+        <form id="image-form">
+            <label for="prompt">Prompt:</label>
+            <input type="text" id="prompt" name="prompt" placeholder="Describe your image..." required>
+            <button type="submit">Generate</button>
+
+            <br>
+            <label for="dropdown">Image Size:</label>
+            <select id="size" name="dropdown" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="256x256">256x256</option>
+                <option value="512x512">512x512</option>
+                <option value="1024x1024">1024x1024</option>
+            </select>
+        </form>
+	</div>
+	<div class="w3-display-topright img" style="padding-right: 100px;">
+		<img src="images/wrap it logo 2.png" style="aspect-ratio: 1/1; width: 10vw; alt="logo" >
+	</div>
+</div>
+<div style="margin: 10px;">
+	<button id="download-button" class="w3-button w3-round-xlarge w3-light-grey w3-ripple">
+		<img src="images/download.jpg" alt="Download image" style="width:20px; height:20px;">
+		Download
+	</button>
+	<button id="upload-button" class="w3-button w3-round-xlarge w3-light-grey w3-ripple" style="margin-left:30px; padding-right:40px">
+		<img src="images/upload.jpg" alt="Upload image" style="width:20px; height:20px;">
+		Upload  
+	</button>
+</div>
+<body>
+<div class="w3-display-container design-tools w3-display-topright">
+	<button id="draw-button" class="w3-button w3-round w3-ripple" style="background-color: #A0B2DE; margin: 15px;">
+		<img src="images/pencil.png" alt="draw" style="width:5vw; aspect-ratio: 1/1;">
+	</button>
+	<button id="add-image-button" class="w3-button w3-round w3-ripple img" style="background-color: #A0B2DE; margin: 15px;">
+		<img src="images/add-image.png" alt="add image" style="width:5vw; aspect-ratio: 1/1;">
+	</button>
+	<br>
+	<button id="fill-button" class="w3-button w3-round w3-ripple img" style="background-color: #A0B2DE; margin: 15px;">
+		<img src="images/paint-bucket.png" alt="fill tool" style="width:5vw; aspect-ratio: 1/1;">
+	</button>
+	<button id="erase-button" class="w3-button w3-round w3-ripple img" style="background-color: #A0B2DE; margin: 15px;">
+		<img src="images/erase.png" alt="eraser" style="width:5vw; aspect-ratio: 1/1;">
+	</button>
+	<br>
+	<button id="text-button" class="w3-button w3-round w3-ripple img" style="background-color: #A0B2DE; margin: 15px;">
+		<img src="images/text.png" alt="text" style="width:5vw; aspect-ratio: 1/1;">
+	</button>
+	<button id="paint-button" class="w3-button w3-round w3-ripple img" style="background-color: #A0B2DE; margin: 15px;">
+		<img src="images/paintbrush.png" alt="paint" style="width:5vw; aspect-ratio: 1/1;">
+	</button>
+	<br>
+	<button id="sticker-button" class="w3-button w3-round w3-ripple img" style="background-color: #A0B2DE; margin: 15px;">
+		<img src="images/sticker.png" alt="sticker" style="width:5vw; aspect-ratio: 1/1;">
+	</button>
+	<button id="crop-button" class="w3-button w3-round w3-ripple img" style="background-color: #A0B2DE; margin: 15px;">
+		<img src="images/crop.png" alt="crop" style="width:5vw; aspect-ratio: 1/1;">
+	</button>
+</div>
+<div class="w3-display-container decorate">
+	<h2></h2>
+	<img id="generated-image" alt="." style="max-width: 100%;">
+
+	<script src="mainPageScript.js"></script>
+</div>
+<div class="w3-display-container w3-display-bottomleft">
+	<button id="save-button" class="w3-button w3-round w3-ripple img" style="background-color: #E3E8F4; margin: 15px;">
+		<img src="images/save.png" alt="save" style="width:3vw; aspect-ratio: 1/1;">
+	</button>
+	<button id="logout-button" class="w3-button w3-round w3-ripple img" style="background-color: #E3E8F4; margin: 15px;">
+		<img src="images/logout.png" alt="logout" style="width:3vw; aspect-ratio: 1/1;">
+		
+	</button>
+</div>
+</body>
+</HTML>
