@@ -11,6 +11,15 @@ document.getElementById("registerButton").addEventListener("click", async () => 
     errorMessage.style.display = "none";
     successMessage.style.display = "none";
 
+    function isPasswordStrong(password) {
+        const minLength = 8;
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasLowerCase = /[a-z]/.test(password);
+        const hasNumber = /[0-9]/.test(password);
+        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+        return password.length >= minLength && hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar;
+    }
+
     // Validate inputs
     if (!email || !username || !password || !confirmPassword) {
         errorMessage.textContent = "All fields are required.";
@@ -24,8 +33,8 @@ document.getElementById("registerButton").addEventListener("click", async () => 
         return;
     }
 
-    if (password.length < 8) {
-        errorMessage.textContent = "Password must be at least 8 characters long.";
+    if (!isPasswordStrong(password)) {
+        errorMessage.textContent = "This Password Doesnt meet the requirements.It must include an Uppercase letter, a Lowercase letter, a Number, A Special Character(EG:!£$%^&), and be at least 8 Characters long.";
         errorMessage.style.display = "block";
         return;
     }
