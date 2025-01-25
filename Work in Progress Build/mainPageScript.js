@@ -11,7 +11,6 @@ async function generateImage() {
             alert("Please select a valid image size.");
             return;
         }
-
         const response = await fetch("http://localhost:3000/api/generate-image", {
             method: "POST",
             headers: {
