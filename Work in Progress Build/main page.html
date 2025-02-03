@@ -4,6 +4,15 @@
 <link href="main page.css" rel="stylesheet"/>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    #imagePreview {
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      max-width: 300px;
+      cursor: grab;
+    }
+  </style>
 </head>
 <div class="w3-display-container" style="height:100px;">
 	<div class = "ai-generator">
@@ -33,10 +42,6 @@
 		<img src="images/download.jpg" alt="Download image" style="width:20px; height:20px;">
 		Download
 	</button>
-	<button id="upload-button" class="w3-button w3-round-xlarge w3-light-grey w3-ripple" style="margin-left:30px; padding-right:40px">
-		<img src="images/upload.jpg" alt="Upload image" style="width:20px; height:20px;">
-		Upload  
-	</button>
 </div>
 <body>
 <div class="w3-display-container design-tools w3-display-topright">
@@ -46,6 +51,7 @@
 	<button id="add-image-button" class="w3-button w3-round w3-ripple img" style="background-color: #A0B2DE; margin: 15px;">
 		<img src="images/add-image.png" alt="add image" style="width:5vw; aspect-ratio: 1/1;">
 	</button>
+	<input type="file" id="fileInput" accept="image/*" style="display: none;">
 	<br>
 	<button id="fill-button" class="w3-button w3-round w3-ripple img" style="background-color: #A0B2DE; margin: 15px;">
 		<img src="images/paint-bucket.png" alt="fill tool" style="width:5vw; aspect-ratio: 1/1;">
@@ -68,10 +74,10 @@
 		<img src="images/crop.png" alt="crop" style="width:5vw; aspect-ratio: 1/1;">
 	</button>
 </div>
-<div class="w3-display-container decorate">
+<div id ="dropZone" class="w3-display-container decorate">
 	<h2></h2>
 	<img id="generated-image" alt="." style="max-width: 100%;">
-
+		<img id="imageUploaded" style="max-width: 300px; display: none;" alt="Image uploaded">
 	<script src="mainPageScript.js"></script>
 </div>
 <div class="w3-display-container w3-display-bottomleft">
@@ -83,5 +89,77 @@
 		
 	</button>
 </div>
+  <script>
+    const addImageButton = document.getElementById('add-image-button');
+    const fileInput = document.getElementById('fileInput');
+    const imagePreview = document.getElementById('imageUploaded')
+	const dropZone = document.getElementById('dropZone');
+    addImageButton.addEventListener('click', () => {
+      fileInput.click();
+    });
+
+    fileInput.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          imagePreview.src = e.target.result;
+          imagePreview.style.display = 'block';
+		  imagePreview.style.left = '50px';
+          imagePreview.style.top = '50px';
+		  imagePreview.style.position = 'absolute';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+	let isDragging = false;
+    let offsetX, offsetY;
+
+    imagePreview.addEventListener('mousedown', (event) => {
+      isDragging = true;
+      offsetX = event.clientX - imagePreview.getBoundingClientRect().left;
+      offsetY = event.clientY - imagePreview.getBoundingClientRect().top;
+      imagePreview.style.cursor = 'grabbing';
+    });
+	
+	document.addEventListener('mousemove', (event) => {
+	if (isDragging) {
+    const x = event.clientX - offsetX;
+    const y = event.clientY - offsetY;
+
+    const dropZoneRect = dropZone.getBoundingClientRect();
+    const imageWidth = imagePreview.offsetWidth;
+    const imageHeight = imagePreview.offsetHeight;
+
+    const constrainedX = Math.min(
+      Math.max(dropZoneRect.left, x),
+      dropZoneRect.right - imageWidth
+    );
+    const constrainedY = Math.min(
+      Math.max(dropZoneRect.top, y),
+      dropZoneRect.bottom - imageHeight
+    );
+
+    imagePreview.style.left = `${constrainedX - dropZoneRect.left}px`;
+    imagePreview.style.top = `${constrainedY - dropZoneRect.top}px`;
+  }
+});
+
+document.addEventListener('mouseup', (event) => {
+  if (isDragging) {
+    isDragging = false;
+    imagePreview.style.cursor = 'grab';
+
+    const dropZoneRect = dropZone.getBoundingClientRect();
+    const imageRect = imagePreview.getBoundingClientRect();
+
+    const isInsideDropZone =
+      imageRect.left >= dropZoneRect.left &&
+      imageRect.right <= dropZoneRect.right &&
+      imageRect.top >= dropZoneRect.top &&
+      imageRect.bottom <= dropZoneRect.bottom;
+  }
+});
+  </script>
 </body>
 </HTML>
