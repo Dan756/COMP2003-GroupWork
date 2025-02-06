@@ -42,3 +42,18 @@ document.getElementById("image-form").addEventListener("submit", async (event) =
     await generateImage();
 });
 
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("image-form").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        let button = document.getElementById("genButton");
+        button.disabled = true;
+        button.textContent = "Cooling down...";
+
+        setTimeout(() => {
+            button.disabled = false;
+            button.textContent = "Generate";
+        }, 30000);
+    });
+});

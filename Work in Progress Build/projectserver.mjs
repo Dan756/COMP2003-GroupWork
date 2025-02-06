@@ -15,7 +15,7 @@ const OPENAI_API_KEY = "Insert Api Key";
 
 // Database Configuration (Sensitive Details have been removed)
 const dbConfig = {
-    user: "Enter Username", 
+    user: "SA", 
     password: "Insert Password", 
     server: "localhost", 
     database: "UserLogin", 
