@@ -5,13 +5,18 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    #imagePreview {
+    #imageUploaded {
       position: absolute;
       top: 50px;
       left: 50px;
       max-width: 300px;
       cursor: grab;
     }
+	#dropZone {
+		position: relative;
+		min-height: 300px;
+		border: 2px dashed #ccc;
+	}
   </style>
 </head>
 <div class="w3-display-container" style="height:100px;">
@@ -77,7 +82,7 @@
 <div id ="dropZone" class="w3-display-container decorate">
 	<h2></h2>
 	<img id="generated-image" alt="." style="max-width: 100%;">
-		<img id="imageUploaded" style="max-width: 300px; display: none;" alt="Image uploaded">
+	<img id="imageUploaded" style="max-width: 300px; display: none;" alt="Image uploaded">
 	<script src="mainPageScript.js"></script>
 </div>
 <div class="w3-display-container w3-display-bottomleft">
@@ -90,13 +95,13 @@
 	</button>
 </div>
   <script>
-    const addImageButton = document.getElementById('add-image-button');
-    const fileInput = document.getElementById('fileInput');
-    const imagePreview = document.getElementById('imageUploaded')
-	const dropZone = document.getElementById('dropZone');
-    addImageButton.addEventListener('click', () => {
-      fileInput.click();
-    });
+		const addImageButton = document.getElementById('add-image-button');
+		const fileInput = document.getElementById('fileInput');
+		const imagePreview = document.getElementById('imageUploaded')
+		const dropZone = document.getElementById('dropZone');
+		addImageButton.addEventListener('click', () => {
+		fileInput.click();
+		});
 
     fileInput.addEventListener('change', (event) => {
       const file = event.target.files[0];
@@ -159,6 +164,23 @@ document.addEventListener('mouseup', (event) => {
       imageRect.top >= dropZoneRect.top &&
       imageRect.bottom <= dropZoneRect.bottom;
   }
+});
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Delete" || event.key === "Backspace") {
+        const imagePreview = document.getElementById("imageUploaded");
+        const fileInput = document.getElementById("fileInput");
+
+        if (imagePreview && imagePreview.style.display !== "none") {
+            imagePreview.src = ""; // Clears the image
+            imagePreview.style.display = "none"; // Hides it
+
+            // Reset file input so the same file can be uploaded again
+            fileInput.value = ""; 
+
+            console.log("Image removed and input reset!");
+        }
+    }
 });
   </script>
 </body>
