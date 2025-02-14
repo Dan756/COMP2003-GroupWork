@@ -49,11 +49,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let button = document.getElementById("genButton");
         button.disabled = true;
-        button.textContent = "Cooling down...";
 
-        setTimeout(() => {
-            button.disabled = false;
-            button.textContent = "Generate";
-        }, 30000);
+        let cooldown = 30; // Cooldown duration in seconds
+        button.textContent = `This Button is on cooldown. (${cooldown}s)`;
+
+        let countdown = setInterval(() => {
+            cooldown--;
+            button.textContent = `This Button is on cooldown. (${cooldown}s)`;
+
+            if (cooldown <= 0) {
+                clearInterval(countdown);
+                button.disabled = false;
+                button.textContent = "Generate";
+            }
+        }, 1000); // Update every second
     });
 });
