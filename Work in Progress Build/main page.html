@@ -26,7 +26,7 @@
         <form id="image-form">
             <label for="prompt">Prompt:</label>
             <input type="text" id="prompt" name="prompt" placeholder="Describe your image..." required>
-            <button type="submit">Generate</button>
+            <button type="submit" id="genButton">Generate</button>
 
             <br>
             <label for="dropdown">Image Size:</label>
@@ -82,8 +82,8 @@
 <div id ="dropZone" class="w3-display-container decorate">
 	<h2></h2>
 	<img id="generated-image" alt="." style="max-width: 100%;">
-	<img id="imageUploaded" style="max-width: 300px; display: none;" alt="Image uploaded">
-	<script src="mainPageScript.js"></script>
+		<img id="imageUploaded" style="max-width: 300px; display: none;" alt="Image uploaded">
+	
 </div>
 <div class="w3-display-container w3-display-bottomleft">
 	<button id="save-button" class="w3-button w3-round w3-ripple img" style="background-color: #E3E8F4; margin: 15px;">
@@ -93,6 +93,7 @@
 		<img src="images/logout.png" alt="logout" style="width:3vw; aspect-ratio: 1/1;">
 		
 	</button>
+    <script src="mainPageScript.js" defer></script>
 </div>
   <script>
 		const addImageButton = document.getElementById('add-image-button');

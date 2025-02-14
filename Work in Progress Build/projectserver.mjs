@@ -15,7 +15,7 @@ const OPENAI_API_KEY = "Insert Api Key";
 
 // Database Configuration (Sensitive Details have been removed)
 const dbConfig = {
-    user: "Enter Username", 
+    user: "SA", 
     password: "Insert Password", 
     server: "localhost", 
     database: "UserLogin", 
@@ -76,8 +76,23 @@ app.post("/api/generate-image", async (req, res) => {
 app.post("/register", async (req, res) => {
     const { email, username, password } = req.body;
 
+    function isPasswordStrong(password) {
+        const minLength = 8;
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasLowerCase = /[a-z]/.test(password);
+        const hasNumber = /[0-9]/.test(password);
+        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+        return password.length >= minLength && hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar;
+    }
+
     if (!email || !username || !password) {
         return res.status(400).json({ message: "All fields are required." });
+    }
+
+    if (!isPasswordStrong(password)) {
+        errorMessage.textContent = "Password must be at least 8 characters long and include uppercase letters, lowercase letters, numbers, and special characters.";
+        errorMessage.style.display = "block";
+        return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

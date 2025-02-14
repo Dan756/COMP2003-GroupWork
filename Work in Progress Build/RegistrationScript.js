@@ -61,9 +61,10 @@ document.getElementById("registerButton").addEventListener("click", async () => 
             document.getElementById("username").value = "";
             document.getElementById("password").value = "";
             document.getElementById("confirmPassword").value = "";
-        } else {
-            // Show error message
-            errorMessage.textContent = data.message || "Registration failed. Please try again.";
+        }
+        if (data.error) {
+            const errorMessage = document.getElementById("errorMessage");
+            errorMessage.textContent = data.error;
             errorMessage.style.display = "block";
         }
     } catch (error) {

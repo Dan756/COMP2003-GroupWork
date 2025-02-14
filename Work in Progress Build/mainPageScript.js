@@ -42,3 +42,26 @@ document.getElementById("image-form").addEventListener("submit", async (event) =
     await generateImage();
 });
 
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("image-form").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        let button = document.getElementById("genButton");
+        button.disabled = true;
+
+        let cooldown = 30; // Cooldown duration in seconds
+        button.textContent = `This Button is on cooldown. (${cooldown}s)`;
+
+        let countdown = setInterval(() => {
+            cooldown--;
+            button.textContent = `This Button is on cooldown. (${cooldown}s)`;
+
+            if (cooldown <= 0) {
+                clearInterval(countdown);
+                button.disabled = false;
+                button.textContent = "Generate";
+            }
+        }, 1000); // Update every second
+    });
+});

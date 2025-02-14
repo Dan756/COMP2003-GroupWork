@@ -33,3 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {  //dynamically update webp
             e.clientY - canvas.offsetTop
         );
     }
+}
+canvas.addEventListener('mousedown', startPainting);
+canvas.addEventListener('mouseup', stopPainting);
+canvas.addEventListener('mousemove', draw);
+clearCanvas.addEventListener('click', () => {
+    ctx.clearCanvas(
+        0, 0, canvas.width,
+        canvas, height
+    );
+})
