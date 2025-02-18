@@ -42,6 +42,10 @@ document.getElementById("image-form").addEventListener("submit", async (event) =
     await generateImage();
 });
 
+document.getElementById("resetImage").addEventListener("click", async () => {
+    const noSetImage = "";
+    document.getElementById("generated-image").src = noSetImage;
+});
 
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("image-form").addEventListener("submit", function (event) {
