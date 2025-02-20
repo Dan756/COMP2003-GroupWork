@@ -157,3 +157,24 @@ document.addEventListener("keydown", (event) => {
         }
     }
 });
+
+document.getElementById('download-button').addEventListener('click', () => {
+    const dropZone = document.getElementById('dropZone');
+
+    html2canvas(dropZone).then((canvas) => {
+        const image = canvas.toDataURL('image/png');
+
+        // Create a download link
+        const link = document.createElement('a');
+        link.href = image;
+        link.download = 'vinyl-creation.png';
+
+        // Trigger download
+        link.click();
+
+        console.log('Vinyl image downloaded!');
+    }).catch((error) => {
+        console.error('Error capturing the vinyl:', error);
+    });
+});
+
