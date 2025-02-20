@@ -60,3 +60,13 @@ clearCanvas.addEventListener('click', () => {
 
     const penButton = document.getElementById('penButton');
     const rubberButton = document.getElementById('rubberButton');
+
+    function penOn() {
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.brushColor = colourPicker.value;
+}
+
+    function rubberOn() {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.strokestyle = 'rgba(0, 0, 0, 0)';
+    }
