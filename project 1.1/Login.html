@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <!-- Include W3.CSS -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- Link to External CSS -->
+    <link rel="stylesheet" href="LoginStyle.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Login Section -->
+    <div class="w3-container login-container">
+        <!-- Logo -->
+        <img src="images/logo.png" alt="Wrapit Logo" class="logo">
+
+        <!-- Email Input -->
+        <div class="w3-margin-bottom">
+            <input type="email"
+                   id="email"
+                   class="w3-input w3-border w3-round login-input"
+                   placeholder="Enter Email" required>
+        </div>
+
+        <!-- Password Input -->
+        <div class="w3-margin-bottom">
+            <input type="password"
+                   id="password"
+                   class="w3-input w3-border w3-round login-input"
+                   placeholder="Enter Password" required>
+        </div>
+
+        <!-- Login Button -->
+        <button class="w3-button w3-round w3-large login-button" id="loginButton">
+            <i class="w3-margin-right w3-xlarge fas fa-sign-in-alt"></i> Login
+        </button>
+
+        <!-- Error Message -->
+        <div id="errorMessage" class="w3-text-red w3-margin-top" style="display: none;"></div>
+        
+    <!-- Register Link -->
+        <p>Dont have an account? <a href="Registration.html" class="w3-text-blue">Sign up here</a></p>
+    </div>
+
+
+    <!-- Include JavaScript -->
+    <script src="LoginScript.js"></script>
+</body>
+</html>

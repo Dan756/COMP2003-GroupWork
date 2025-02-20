@@ -65,3 +65,91 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 1000); // Update every second
     });
 });
+
+const addImageButton = document.getElementById('add-image-button');
+const fileInput = document.getElementById('fileInput');
+const imagePreview = document.getElementById('imageUploaded')
+const dropZone = document.getElementById('dropZone');
+addImageButton.addEventListener('click', () => {
+    fileInput.click();
+});
+
+fileInput.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            imagePreview.src = e.target.result;
+            imagePreview.style.display = 'block';
+            imagePreview.style.left = '50px';
+            imagePreview.style.top = '50px';
+            imagePreview.style.position = 'absolute';
+        };
+        reader.readAsDataURL(file);
+    }
+});
+let isDragging = false;
+let offsetX, offsetY;
+
+imagePreview.addEventListener('mousedown', (event) => {
+    isDragging = true;
+    offsetX = event.clientX - imagePreview.getBoundingClientRect().left;
+    offsetY = event.clientY - imagePreview.getBoundingClientRect().top;
+    imagePreview.style.cursor = 'grabbing';
+});
+
+document.addEventListener('mousemove', (event) => {
+    if (isDragging) {
+        const x = event.clientX - offsetX;
+        const y = event.clientY - offsetY;
+
+        const dropZoneRect = dropZone.getBoundingClientRect();
+        const imageWidth = imagePreview.offsetWidth;
+        const imageHeight = imagePreview.offsetHeight;
+
+        const constrainedX = Math.min(
+            Math.max(dropZoneRect.left, x),
+            dropZoneRect.right - imageWidth
+        );
+        const constrainedY = Math.min(
+            Math.max(dropZoneRect.top, y),
+            dropZoneRect.bottom - imageHeight
+        );
+
+        imagePreview.style.left = `${constrainedX - dropZoneRect.left}px`;
+        imagePreview.style.top = `${constrainedY - dropZoneRect.top}px`;
+    }
+});
+
+document.addEventListener('mouseup', (event) => {
+    if (isDragging) {
+        isDragging = false;
+        imagePreview.style.cursor = 'grab';
+
+        const dropZoneRect = dropZone.getBoundingClientRect();
+        const imageRect = imagePreview.getBoundingClientRect();
+
+        const isInsideDropZone =
+            imageRect.left >= dropZoneRect.left &&
+            imageRect.right <= dropZoneRect.right &&
+            imageRect.top >= dropZoneRect.top &&
+            imageRect.bottom <= dropZoneRect.bottom;
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Delete" || event.key === "Backspace") {
+        const imagePreview = document.getElementById("imageUploaded");
+        const fileInput = document.getElementById("fileInput");
+
+        if (imagePreview && imagePreview.style.display !== "none") {
+            imagePreview.src = ""; // Clears the image
+            imagePreview.style.display = "none"; // Hides it
+
+            // Reset file input so the same file can be uploaded again
+            fileInput.value = "";
+
+            console.log("Image removed and input reset!");
+        }
+    }
+});
