@@ -64,9 +64,18 @@ clearCanvas.addEventListener('click', () => {
     function penOn() {
     ctx.globalCompositeOperation = 'source-over';
     ctx.brushColor = colourPicker.value;
-}
+    }
 
     function rubberOn() {
         ctx.globalCompositeOperation = 'destination-out';
         ctx.strokestyle = 'rgba(0, 0, 0, 0)';
     }
+
+    penButton.addEventListener('click', () => {
+        penOn();
+    });
+
+    rubberButton.addEventListener('click', () => {
+        rubberOn();
+    });
+}
