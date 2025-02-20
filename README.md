@@ -9,3 +9,5 @@ Dan Stevens
 Sam Stevens
 Will Keogh
 Dan Taylor
+
+Paint feature created with resources from Geeks4Geeks (https://www.geeksforgeeks.org/create-a-paint-clone-using-html-css-javascript/)

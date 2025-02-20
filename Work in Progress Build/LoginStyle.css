@@ -1,0 +1,61 @@
+﻿/* Reset body margins and set background */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #A0B2DE; /* Light blue */
+    font-family: "Arial", sans-serif;
+}
+
+/* Login container */
+.login-container {
+    max-width: 400px;
+    margin: 0 auto; /* Center horizontally */
+    padding: 40px 20px;
+    background-color: #A0B2DE; /* White background */
+    border-radius: 8px; /* Rounded corners */
+    
+    text-align: center;
+    position: relative;
+}
+
+/* Logo styling */
+.logo {
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Login input fields */
+.login-input {
+    margin-bottom: 15px;
+}
+
+/* Custom button styling */
+.custom-button {
+    background-color: #6a5acd; /* Custom purple */
+    color: white;
+}
+
+    .custom-button:hover {
+        background-color: #483d8b; /* Darker purple */
+    }
+
+/* Login button styling */
+.login-button {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+    .login-button:hover {
+        background-color: #dcdcdc;
+    }
+
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}

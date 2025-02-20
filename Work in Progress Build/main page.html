@@ -1,0 +1,191 @@
+<!DOCTYPE HTML>
+<HTML>
+<head>
+<link href="main page.css" rel="stylesheet"/>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    #imageUploaded {
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      max-width: 300px;
+      cursor: grab;
+    }
+	#dropZone {
+		position: relative;
+		min-height: 300px;
+		border: 2px dashed #ccc;
+	}
+  </style>
+</head>
+<div class="w3-display-container" style="height:100px;">
+	<div class = "ai-generator">
+		<img src="images/wrap it logo 2.png" alt="gpt-logo" style ="width: 13vw; height: 10vh;">
+		<br>
+        <form id="image-form">
+            <label for="prompt">Prompt:</label>
+            <input type="text" id="prompt" name="prompt" placeholder="Describe your image..." required>
+            <button type="submit" id="genButton">Generate</button>
+
+            <br>
+            <label for="dropdown">Image Size:</label>
+            <select id="size" name="dropdown" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="256x256">256x256</option>
+                <option value="512x512">512x512</option>
+                <option value="1024x1024">1024x1024</option>
+            </select>
+        </form>
+	</div>
+	<div class="w3-display-topright img" style="padding-right: 100px;">
+		<img src="images/wrap it logo 2.png" style="aspect-ratio: 1/1; width: 10vw; alt="logo" >
+	</div>
+</div>
+<div style="margin: 10px;">
+	<button id="download-button" class="w3-button w3-round-xlarge w3-light-grey w3-ripple">
+		<img src="images/download.jpg" alt="Download image" style="width:20px; height:20px;">
+		Download
+	</button>
+    <button id="resetImage" class="w3-button w3-round-xlarge w3-light-grey w3-ripple" alt="AI Image Reset">
+        Reset AI generated Image
+    </button>
+</div>
+<body>
+<div class="w3-display-container design-tools w3-display-topright">
+	<button id="draw-button" class="w3-button w3-round w3-ripple" style="background-color: #A0B2DE; margin: 15px;">
+		<img src="images/pencil.png" alt="draw" style="width:5vw; aspect-ratio: 1/1;">
+	</button>
+	<button id="add-image-button" class="w3-button w3-round w3-ripple img" style="background-color: #A0B2DE; margin: 15px;">
+		<img src="images/add-image.png" alt="add image" style="width:5vw; aspect-ratio: 1/1;">
+	</button>
+	<input type="file" id="fileInput" accept="image/*" style="display: none;">
+	<br>
+	<button id="fill-button" class="w3-button w3-round w3-ripple img" style="background-color: #A0B2DE; margin: 15px;">
+		<img src="images/paint-bucket.png" alt="fill tool" style="width:5vw; aspect-ratio: 1/1;">
+	</button>
+	<button id="erase-button" class="w3-button w3-round w3-ripple img" style="background-color: #A0B2DE; margin: 15px;">
+		<img src="images/erase.png" alt="eraser" style="width:5vw; aspect-ratio: 1/1;">
+	</button>
+	<br>
+	<button id="text-button" class="w3-button w3-round w3-ripple img" style="background-color: #A0B2DE; margin: 15px;">
+		<img src="images/text.png" alt="text" style="width:5vw; aspect-ratio: 1/1;">
+	</button>
+	<button id="paint-button" class="w3-button w3-round w3-ripple img" style="background-color: #A0B2DE; margin: 15px;">
+		<img src="images/paintbrush.png" alt="paint" style="width:5vw; aspect-ratio: 1/1;">
+	</button>
+	<br>
+	<button id="sticker-button" class="w3-button w3-round w3-ripple img" style="background-color: #A0B2DE; margin: 15px;">
+		<img src="images/sticker.png" alt="sticker" style="width:5vw; aspect-ratio: 1/1;">
+	</button>
+	<button id="crop-button" class="w3-button w3-round w3-ripple img" style="background-color: #A0B2DE; margin: 15px;">
+		<img src="images/crop.png" alt="crop" style="width:5vw; aspect-ratio: 1/1;">
+	</button>
+</div>
+<div id ="dropZone" class="w3-display-container decorate">
+	<h2></h2>
+	<img id="generated-image" alt="." style="max-width: 100%;">
+		<img id="imageUploaded" style="max-width: 300px; display: none;" alt="Image uploaded">
+	
+</div>
+<div class="w3-display-container w3-display-bottomleft">
+	<button id="save-button" class="w3-button w3-round w3-ripple img" style="background-color: #E3E8F4; margin: 15px;">
+		<img src="images/save.png" alt="save" style="width:3vw; aspect-ratio: 1/1;">
+	</button>
+	<button id="logout-button" class="w3-button w3-round w3-ripple img" style="background-color: #E3E8F4; margin: 15px;">
+		<img src="images/logout.png" alt="logout" style="width:3vw; aspect-ratio: 1/1;">
+		
+	</button>
+    <script src="mainPageScript.js" defer></script>
+</div>
+  <script>
+		const addImageButton = document.getElementById('add-image-button');
+		const fileInput = document.getElementById('fileInput');
+		const imagePreview = document.getElementById('imageUploaded')
+		const dropZone = document.getElementById('dropZone');
+		addImageButton.addEventListener('click', () => {
+		fileInput.click();
+		});
+
+    fileInput.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          imagePreview.src = e.target.result;
+          imagePreview.style.display = 'block';
+		  imagePreview.style.left = '50px';
+          imagePreview.style.top = '50px';
+		  imagePreview.style.position = 'absolute';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+	let isDragging = false;
+    let offsetX, offsetY;
+
+    imagePreview.addEventListener('mousedown', (event) => {
+      isDragging = true;
+      offsetX = event.clientX - imagePreview.getBoundingClientRect().left;
+      offsetY = event.clientY - imagePreview.getBoundingClientRect().top;
+      imagePreview.style.cursor = 'grabbing';
+    });
+	
+	document.addEventListener('mousemove', (event) => {
+	if (isDragging) {
+    const x = event.clientX - offsetX;
+    const y = event.clientY - offsetY;
+
+    const dropZoneRect = dropZone.getBoundingClientRect();
+    const imageWidth = imagePreview.offsetWidth;
+    const imageHeight = imagePreview.offsetHeight;
+
+    const constrainedX = Math.min(
+      Math.max(dropZoneRect.left, x),
+      dropZoneRect.right - imageWidth
+    );
+    const constrainedY = Math.min(
+      Math.max(dropZoneRect.top, y),
+      dropZoneRect.bottom - imageHeight
+    );
+
+    imagePreview.style.left = `${constrainedX - dropZoneRect.left}px`;
+    imagePreview.style.top = `${constrainedY - dropZoneRect.top}px`;
+  }
+});
+
+document.addEventListener('mouseup', (event) => {
+  if (isDragging) {
+    isDragging = false;
+    imagePreview.style.cursor = 'grab';
+
+    const dropZoneRect = dropZone.getBoundingClientRect();
+    const imageRect = imagePreview.getBoundingClientRect();
+
+    const isInsideDropZone =
+      imageRect.left >= dropZoneRect.left &&
+      imageRect.right <= dropZoneRect.right &&
+      imageRect.top >= dropZoneRect.top &&
+      imageRect.bottom <= dropZoneRect.bottom;
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Delete" || event.key === "Backspace") {
+        const imagePreview = document.getElementById("imageUploaded");
+        const fileInput = document.getElementById("fileInput");
+
+        if (imagePreview && imagePreview.style.display !== "none") {
+            imagePreview.src = ""; // Clears the image
+            imagePreview.style.display = "none"; // Hides it
+
+            // Reset file input so the same file can be uploaded again
+            fileInput.value = ""; 
+
+            console.log("Image removed and input reset!");
+        }
+    }
+});
+  </script>
+</body>
+</HTML>

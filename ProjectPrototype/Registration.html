@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <!-- Include W3.CSS -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- Link to External CSS -->
+    <link rel="stylesheet" href="RegistrationStyle.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Registration Section -->
+    <div class="w3-container login-container w3-display-topmiddle">
+        <!-- Logo -->
+        <img src="images/logo.png" alt="Wrapit Logo" class="logo">
+
+        <!-- Name Input -->
+        <div class="w3-margin-bottom">
+            <input type="text"
+                   id="username"
+                   class="w3-input w3-border w3-round login-input"
+                   placeholder="Enter Username" required>
+        </div>
+
+        <!-- Email Input -->
+        <div class="w3-margin-bottom">
+            <input type="email"
+                   id="email"
+                   class="w3-input w3-border w3-round login-input"
+                   placeholder="Enter Email" required>
+        </div>
+
+        <!-- Password Input -->
+        <div class="w3-margin-bottom">
+            <input type="password"
+                   id="password"
+                   class="w3-input w3-border w3-round login-input"
+                   placeholder="Enter Password" required>
+        </div>
+
+        <!-- Confirm Password Input -->
+        <div class="w3-margin-bottom">
+            <input type="password"
+                   id="confirmPassword"
+                   class="w3-input w3-border w3-round login-input"
+                   placeholder="Confirm Password" required>
+        </div>
+
+        <!-- Register Button -->
+        <button class="w3-button w3-round w3-large login-button" id="registerButton">
+            <i class="w3-margin-right w3-xlarge fas fa-user-plus"></i> Register
+        </button>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="w3-panel w3-green w3-margin-top" style="display: none;">
+            <p><strong>Success:</strong> User registered successfully!</p>
+        </div>
+
+        <!-- Error Message -->
+        <div id="errorMessage" class="w3-panel w3-red w3-margin-top" style="display: none;">
+            <p><strong>Error:</strong> Something went wrong. Please try again.</p>
+        </div>
+        <!-- Login Link -->
+        <p>Already have an account? <a href="Login.html" class="w3-text-blue">Login here</a></p>
+    </div>
+
+    <!-- Include JavaScript -->
+    <script src="RegistrationScript.js"></script>
+</body>
+</html>
