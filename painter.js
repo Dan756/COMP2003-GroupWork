@@ -43,3 +43,20 @@ clearCanvas.addEventListener('click', () => {
         canvas, height
     );
 })
+
+    brushSize.addEventListener('input', () => {
+        ctx.brushSize = brushSize.value;
+        newBrushSizeLabel(brushSize.value);
+    });
+
+
+    function newBrushSizeLabel(size) {
+        const BrushSizeLabel = document.getElementById('brush-size-label');
+        if (BrushSizeLabel) {
+            BrushSizeLabel.textContent =
+                'Brush Size: ${size}';
+        }
+    }
+
+    const penButton = document.getElementById('penButton');
+    const rubberButton = document.getElementById('rubberButton');
