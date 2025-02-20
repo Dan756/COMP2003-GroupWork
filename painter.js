@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {  //dynamically update webp
     const ctx = paintCanvas.getContext('2d');
     const colourPicker = document.getElementById('colour');
     const sizeSlider = document.getElementById('size');
-    const clearButton = document.getElementById('clear');
+    const clearCanvas = document.getElementById('clear');
 
     paintCanvas.width = 400;  // canvas size set
     paintCanvas.height = 400;
@@ -13,40 +13,45 @@ document.addEventListener('DOMContentLoaded', () => {  //dynamically update webp
     let brushColor = colorPicker.value;
     let brushSize = sizeSlider.value;
 
-    function startPainting = (e) => {
+    function startPainting(e) {
         painting = true;
         draw(e);
     };
-    function stopPainting = () => {
+    function stopPainting() {
         painting = false;
         ctx.beginPath();
     };
 
     function draw(e) {
         if (!painting) return;
-        ctx.brushColor =
+        ctx.strokeStyle =
             colourPicker.value; //pick brush colour
-        ctx.brushSize =
+        ctx.lineWidth =
             brushSize.value;
         ctx.lineTo(
-            e.clientX - canvas.offsetleft,
-            e.clientY - canvas.offsetTop
+            e.clientX - paintCanvas.offsetleft,
+            e.clientY - paintCanvas.offsetTop
         );
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(
+            e.clientX - paintCanvas.offsetleft,
+            e.clientY - paintCanvas.offsetTop);
     }
 
 canvas.addEventListener('mousedown', startPainting);
 canvas.addEventListener('mouseup', stopPainting);
 canvas.addEventListener('mousemove', draw);
 clearCanvas.addEventListener('click', () => {
-    ctx.clearCanvas(
+    ctx.clearRect(
         0, 0, canvas.width,
         canvas, height
     );
 })
 
     brushSize.addEventListener('input', () => {
-        ctx.brushSize = brushSize.value;
-        newBrushSizeLabel(brushSize.value);
+        ctx.brushSize = sizeSlider.value;
+        
     });
 
 
@@ -54,7 +59,7 @@ clearCanvas.addEventListener('click', () => {
         const BrushSizeLabel = document.getElementById('brush-size-label');
         if (BrushSizeLabel) {
             BrushSizeLabel.textContent =
-                'Brush Size: ${size}';
+                `Brush Size: ${size}`;
         }
     }
 
@@ -68,7 +73,7 @@ clearCanvas.addEventListener('click', () => {
 
     function rubberOn() {
         ctx.globalCompositeOperation = 'destination-out';
-        ctx.strokestyle = 'rgba(0, 0, 0, 0)';
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0)';
     }
 
     penButton.addEventListener('click', () => {
