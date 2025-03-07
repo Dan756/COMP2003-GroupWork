@@ -147,8 +147,8 @@ document.addEventListener("keydown", (event) => {
         const fileInput = document.getElementById("fileInput");
 
         if (imagePreview && imagePreview.style.display !== "none") {
-            imagePreview.src = ""; // Clears the image
-            imagePreview.style.display = "none"; // Hides it
+            imagePreview.src = "";
+            imagePreview.style.display = "none";
 
             // Reset file input so the same file can be uploaded again
             fileInput.value = "";
@@ -158,18 +158,22 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
+const format = document.getElementById('format').value;
+const generatedVinyl = document.getElementById('generated-vinyl');
+const saveButton = document.getElementById('save-button');
+const clearButton = document.getElementById('clear-button');
 document.getElementById('download-button').addEventListener('click', () => {
-    const dropZone = document.getElementById('dropZone');
 
     html2canvas(dropZone).then((canvas) => {
-        const image = canvas.toDataURL('image/png');
+        let imageType = `image/${format}`;
+        let image = canvas.toDataURL(imageType);
 
         // Create a download link
         const link = document.createElement('a');
         link.href = image;
-        link.download = 'vinyl-creation.png';
+        link.download = 'vinyl-creation.' + format;
 
-        // Trigger download
+        // Trigger a click to start the download
         link.click();
 
         console.log('Vinyl image downloaded!');
@@ -178,3 +182,27 @@ document.getElementById('download-button').addEventListener('click', () => {
     });
 });
 
+window.addEventListener('load', () => {
+    const savedImage = localStorage.getItem('savedVinyl');
+    if (savedImage) {
+        generatedVinyl.src = savedImage;
+        generatedVinyl.style.display = 'block';
+    }
+});
+
+saveButton.addEventListener('click', () => {
+    html2canvas(dropZone).then(canvas => {
+        const vinyl = canvas.toDataURL('image/png');
+        localStorage.setItem('savedVinyl', vinyl);
+        alert('Vinyl design saved!');
+    }).catch(error => {
+        console.error('Error capturing canvas:', error);
+        alert('Failed to save the vinyl.');
+    });
+});
+
+clearButton.addEventListener('click', () => {
+    localStorage.removeItem('savedVinyl');
+    generatedVinyl.style.display = 'none';
+    alert('Saved vinyl cleared.');
+});
