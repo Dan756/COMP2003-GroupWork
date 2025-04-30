@@ -5,13 +5,32 @@ import cors from "cors";
 import fetch from "node-fetch";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./swaggerConfig.mjs";
+import session from "express-session";
 
 
 
 const PORT = 3000;
 const app = express();
-app.use(cors()); //middleware to prevent Cross origin resource sharing errors
+app.use(
+    cors({
+        origin: "http://127.0.0.1:5500", // origin of the session key, was added for use of cookies but the feature was scrapped
+        credentials: true, // Allow cookies
+    })
+); //middleware to prevent Cross origin resource sharing errors
 app.use(express.json()); // Parse JSON body
+
+app.use(
+    session({
+        secret: "COMP2003verysecretkey",
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            httpOnly: true, //prevents js code from accessing the session
+            secure: false,
+            maxAge: 24 * 60 * 60 * 1000, // Cookie expires in 1 day
+        },
+    })
+);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 //Project API key(API key removed for security reasons)
@@ -20,12 +39,12 @@ const OPENAI_API_KEY = "";
 
 // Database Configuration
 const dbConfig = {
-    user: "sa", 
-    password: "ServerPassword2003!", 
-    server: "localhost", 
-    database: "UserLogin", 
+    user: "sa",
+    password: "ServerPassword2003!",
+    server: "localhost",
+    database: "UserLogin",
     options: {
-        encrypt: false, 
+        encrypt: false,
         trustServerCertificate: true, // Required for self-signed certs
     },
 };
@@ -252,15 +271,37 @@ app.post("/login", async (req, res) => {
             return res.status(400).json({ message: "Invalid email or password." });
         }
 
+        req.session.user = { id: user.ID, email: user.Email, username: user.Username }; //store user data in session
+
         res.status(200).json({ message: "Login successful.", username: user.Username });
     } catch (err) {
         console.error("Error during login:", err);
         res.status(500).json({ message: "An error occurred." });
     }
 });
-
-
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-    console.log(`Swagger Docs available at http://localhost:${PORT}/api-docs`);
+//Was for use for cookies which was scrapped
+//Endpoint to check if a user if logged in with a valid session token
+app.get("/session", (req, res) => {
+    if (req.session.user) {
+        res.json({ loggedIn: true, user: req.session.user });
+    } else {
+        res.status(401).json({ loggedIn: false });
+    }
 });
+
+//Endpoint to destroy the cookie when the user logs out
+app.post("/logout", (req, res) => {
+    req.session.destroy(() => {
+        res.clearCookie("connect.sid"); // Clears session cookie
+        res.json({ message: "Logged out successfully" });
+    });
+});
+
+if (process.env.NODE_ENV !== "test") {
+    app.listen(PORT, () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+      console.log(`Swagger Docs available at http://localhost:${PORT}/api-docs`);
+    });
+  }
+  
+  export default app; // Export app for testing
