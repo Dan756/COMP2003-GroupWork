@@ -169,7 +169,7 @@ const clearButton = document.getElementById('clear-button');
 document.getElementById('download-button').addEventListener('click', () => {
 
     html2canvas(dropZone).then((canvas) => {
-        let imageType = `image/${format}`;
+        let imageType = image / '${ format }';
         let image = canvas.toDataURL(imageType);
 
         // Create a download link
