@@ -37,12 +37,12 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 const OPENAI_API_KEY = "";
 
 
-// Database Configuration
+// Database Configuration //details removed from uploaded version for security purposes
 const dbConfig = {
-    user: "sa",
-    password: "ServerPassword2003!",
-    server: "localhost",
-    database: "UserLogin",
+    user: "",
+    password: "",
+    server: "",
+    database: "",
     options: {
         encrypt: false,
         trustServerCertificate: true, // Required for self-signed certs
