@@ -300,4 +300,8 @@ document.addEventListener('DOMContentLoaded', () => {
         imagePreview.style.pointerEvents = 'auto';
         imagePreview.style.display = 'auto';
     });
+    document.getElementById("logout-button").addEventListener("click", function () {
+        window.location.href = "login.html";
+      });
+      
 });
